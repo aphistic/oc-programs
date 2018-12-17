@@ -48,8 +48,9 @@ for item, count in pairs(junk) do
     print(item .. " is junk, have " .. tostring(count))
 
     slot = inv:lowest_count(item)
-    if loc ~= nil then
+    if slot ~= nil then
         count = inv:count_at(slot)
         print("lowest: " .. tostring(count))
+        trash:dump_max(slot)
     end
 end
