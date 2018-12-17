@@ -50,4 +50,26 @@ function Inventory:has_over(amount)
     return res
 end
 
+function Inventory:lowest_count(item)
+    locs = self._locations[item]
+    if locs == nil then
+        return nil
+    end
+
+    lowest_loc = -1
+    lowest = -1
+    for loc, count in pairs(locs) do
+        if lowest == -1 or (count > 0 and count < lowest) then
+            lowest_loc = loc
+            lowest = count
+        end
+    end
+
+    if lowest_loc < 0 then
+        return nil
+    end
+    
+    return (lowest_loc, lowest)
+end
+
 return Inventory

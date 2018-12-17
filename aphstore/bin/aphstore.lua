@@ -40,9 +40,15 @@ end
 inv = Inventory.new(component.transposer, inv_side)
 trash = Trash.new(component.transposer, trash_side)
 
+print("Refreshing inventory")
 inv:refresh()
 
 junk = inv:has_over(trash_max)
 for item, count in pairs(junk) do
     print(item .. " is junk, have " .. tostring(count))
+
+    loc = inv:lowest_count(item)
+    if loc ~= nil then
+        print("lowest: " .. tostring(loc))
+    end
 end
