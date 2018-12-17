@@ -47,9 +47,9 @@ junk = inv:has_over(trash_max)
 for item, count in pairs(junk) do
     print(item .. " is junk, have " .. tostring(count))
 
-    count = inv:lowest_count(item)
+    slot = inv:lowest_count(item)
     if loc ~= nil then
-        count = inv:count_at(count)
+        count = inv:count_at(slot)
         print("lowest: " .. tostring(count))
     end
 end
