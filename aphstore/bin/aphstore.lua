@@ -2,6 +2,9 @@ local component = require("component")
 local os = require("os")
 local sides = require("sides")
 
+local Inventory = require("aphstore/inventory")
+local Trash = require("aphstore/trash")
+
 inv_names = {
     "storagedrawers:controller",
 }
@@ -33,25 +36,13 @@ if inv_side < 0 then
   print("Could not find inventory")
   os.exit()
 end
- 
-inv_size = component.transposer.getInventorySize(inv_side)
-print("Using inventory in side " .. tostring(inv_side) .. " with size " .. tostring(inv_size))
-if trash_side >= 0 then
-    print("Using trash on side " .. tostring(trash_side))
-else
-    print("Couldn't find trash to use")
-end
- 
-item_aggregates = {}
-for i=1,inv_size do
-    stack = component.transposer.getStackInSlot(inv_side, i)
-    if stack ~= nil then
-        item_aggregates[stack.name] = (item_aggregates[stack.name] or 0) + stack.size
-    end
-end
- 
-for k, v in pairs(item_aggregates) do
-    if v > trash_max then
-        print(k .. " - " .. tostring(v))
-    end
+
+inv = Inventory(component.transposer, inv_side)
+trash = Trash(component.transposer, trash_side)
+
+inv:refresh()
+
+junk = inv:has_over(trash_max)
+for item, count in pairs(junk)
+    print(item .. " is junk, have " .. tostring(count))
 end
