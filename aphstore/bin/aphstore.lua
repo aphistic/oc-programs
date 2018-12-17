@@ -43,6 +43,6 @@ trash = Trash(component.transposer, trash_side)
 inv:refresh()
 
 junk = inv:has_over(trash_max)
-for item, count in pairs(junk)
+for item, count in pairs(junk) do
     print(item .. " is junk, have " .. tostring(count))
 end
