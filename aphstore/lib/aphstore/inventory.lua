@@ -1,12 +1,6 @@
 local Inventory = {}
 Inventory.__index = Inventory
 
-setmetatable(Inventory, {
-    _call = function (cls, ...)
-        return cls.new(...)
-    end,
-})
-
 function Inventory.new(transposer, side)
     local self = setmetatable({}, Inventory)
     self._transposer = transposer

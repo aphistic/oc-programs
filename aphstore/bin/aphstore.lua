@@ -37,8 +37,8 @@ if inv_side < 0 then
   os.exit()
 end
 
-inv = Inventory(component.transposer, inv_side)
-trash = Trash(component.transposer, trash_side)
+inv = Inventory.new(component.transposer, inv_side)
+trash = Trash.new(component.transposer, trash_side)
 
 inv:refresh()
 
