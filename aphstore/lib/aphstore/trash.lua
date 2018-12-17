@@ -12,10 +12,12 @@ function Trash.new(transposer, side)
     return self
 end
 
-function Trash:dump_max(slot)
-    max = self._transposer.getSlotMaxStackSize(self._side, self._current_slot)
+function Trash:dump_max(side, slot)
+    trash_slot = self._current_slot
+    self._current_slot = trash_slot + 1
+    max = self._transposer.getSlotMaxStackSize(self._side, trash_slot)
 
-    print("moving " .. tostring(max) .. " items from " .. slot .. " to " .. tostring(self._current_slot))
+    print("moving " .. max .. " items from " .. side .. "#" .. slot .. " to " .. self._side .. "#" .. trash_slot)
 
     -- self._transposer.transferItem()
 
