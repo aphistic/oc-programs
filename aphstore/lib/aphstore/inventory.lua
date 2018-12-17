@@ -50,6 +50,15 @@ function Inventory:has_over(amount)
     return res
 end
 
+function Inventory:count_at(slot)
+    stack = self._transposer.getStackInSlot(self._side, slot)
+    if stack ~= nil then
+        return stack.size
+    end
+
+    return nil
+end
+
 function Inventory:lowest_count(item)
     locs = self._locations[item]
     if locs == nil then
@@ -69,7 +78,7 @@ function Inventory:lowest_count(item)
         return nil
     end
     
-    return (lowest_loc, lowest)
+    return lowest_loc
 end
 
 return Inventory
