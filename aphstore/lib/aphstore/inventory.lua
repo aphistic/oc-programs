@@ -31,7 +31,11 @@ function Inventory:refresh()
         stack = self._transposer.getStackInSlot(self._side, i)
         if stack ~= nil then
             self._totals[stack.name] = (self._totals[stack.name] or 0) + stack.size
-            self._locations[stack.name] = (self._locations[stack.name] or {})[i] = stack.size
+
+            location = self._locations[stack.name] or {}
+            location[i] = stack.size
+
+            self._locations[stack.name] = location
         end
     end
 end
