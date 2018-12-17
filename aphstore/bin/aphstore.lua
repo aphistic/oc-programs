@@ -1,6 +1,6 @@
 local component = require("component")
 local os = require("os")
-local side = require("side")
+local sides = require("sides")
 
 inv_names = {
     "storagedrawers:controller",
